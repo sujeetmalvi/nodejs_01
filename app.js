@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser = require("body-parser");
+var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,6 +25,28 @@ app.use('/static',express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// DATABASE CONNECTION STARTS WORKING FINE 
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: ""
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query("SELECT * FROM temp.market_prod_attrib", function (err, result) {
+    if (err) throw err;
+    //console.log("Result: " + result[0].attrib_para);
+    result.forEach(element => {
+        console.log(element.attrib_para);
+    });
+  });
+});
+
+//DATABASE CONNECTION ENDS
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
