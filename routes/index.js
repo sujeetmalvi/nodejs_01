@@ -8,7 +8,7 @@ const { dbhome } = require('../controllers/mycontroller.controller');
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'This is home page' });
   // http://localhost:3000/?id=8
-  //var id = req.query.id;
+//  var id = req.query.id;
   //console.log(id);
   // var con = mysql.createConnection({
   //   host: "localhost",
